@@ -4,7 +4,7 @@
 	<title>SIGN UP</title>
 	<link rel="icon" type="image/x-icon" href="ICON.png">
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
 		body {
   			background-image: url("signup_background.jpg");
   			background-repeat: no-repeat;
@@ -30,46 +30,74 @@
 				padding: 5px 25px 5px 25px;
 				border: none;
 				margin-top:10px;
-				font-family: "Roboto";
+				font-family: "Roboto", sans-serif;
 				position: relative;
          		bottom: 0;
          		transition: bottom 0.5s ease;
          		border-radius:10px;
 		}
+		.usertypebutton{
+			background-color: #258cda;
+			color: white;
+			padding: 5px 25px 5px 25px;
+			border: none;
+			font-family: "Roboto";
+			border-radius:10px;
+		}
 		.loginbutton:hover{
 				bottom:20px;
 		}
 		.signup{
-			font-family: 'Satisfy', cursive;
+			font-family: "Roboto", sans-serif;
 			background-color: white;
-			padding: 20px 20px;
+			padding: 20px 20px 30px 50px;
 			border-radius: 50px;
 			width: 350px;
-			height: 400px;
+			height: 750px;
 			margin: auto;
+		}
+		.text{
+			font-family:'Roboto', sans-serif;
+			background-color: white;
+			border-radius:10px;
+			padding: 10px 10px 10px 10px;
 		}
 	</style>
 </head>
-<body align = "center">
+<body>
 	<div class = di align = "right">
 		<img class = "logo" align = "left" src="LOGO.png" alt="ICON">                                                       
-		<button align = "right" class = "loginbutton">Login</button>
+		<button onclick="window.location = 'LOGIN.html'" align = "right" class = "loginbutton">Login</button>
 	</div>
 	<br>
 	<br>
 	<div class="signup">
 		<h1><b>SIGNUP</b></h1>
-        
+		<button class = "usertypebutton" id = "usertype" onclick="myFunction()">EMPLOYEE</button>
+		<script>
+		function myFunction() {
+		var x = document.getElementById("usertype");
+		if (x.innerHTML === "EMPLOYEE") {
+			x.innerHTML = "ADMINISTRATOR";
+		} else {
+			x.innerHTML = "EMPLOYEE";
+		}
+		}
+		</script>
 		<form>
-			<p><B>USERNAME</B></p>
-			<input type="text" name="" placeholder="Enter Username">
+			<p><B>ENTER USERNAME</B></p>
+			<input class = "text" type="text" name="" placeholder="Enter Username">
+			<p><B>COMPANY NAME</B></p>
+			<input class = "text" type="text" name="" placeholder="COMPANY NAME">
+			<p><B>LOCATION</B></p>
+			<input class = "text" type="text" name="" placeholder="CITY, STATE">
 			<p><b>PASSWORD</b></p>
-			<input type="password" name="" placeholder="Enter Password"><br><br>
-			<input style = "font-family: 'Satisfy',cursive; " type="submit" name="" value="LOGIN"><br><br>
-			<a href="#">Forgot Password</a><br>
-			<a href="#">Don't have an account? Sign up here.</a>
+			<input class = "text"type="password" name="" placeholder="Enter Password">
+			<p><b>RE-ENTER PASSWORD</b></p>
+			<input class = "text"type="password" name="" placeholder="Re-Enter Password"><br><br>
+			<input class = "loginbutton" style = "font-family: 'Roboto', sans-serif; " type="submit" name="" value="SIGN UP"><br><br>
+			<a href="LOGIN.html">Already have an account? Sign in here.</a>
 		</form>
 	</div>
-
 </body>
 </html>

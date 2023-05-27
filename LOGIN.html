@@ -4,7 +4,7 @@
 	<title>LOGIN</title>
 	<link rel="icon" type="image/x-icon" href="ICON.png">
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
 		body {
   			background-image: url("signup_background.jpg");
   			background-repeat: no-repeat;
@@ -30,7 +30,7 @@
 				padding: 5px 25px 5px 25px;
 				border: none;
 				margin-top:10px;
-				font-family: "Roboto";
+				font-family: "Roboto", sans-serif;
 				position: relative;
          		bottom: 0;
          		transition: bottom 0.5s ease;
@@ -40,7 +40,7 @@
 				bottom:20px;
 		}
 		.signup{
-			font-family: 'Satisfy', cursive;
+			font-family:'Roboto', sans-serif;
 			background-color: white;
 			padding: 20px 20px;
 			border-radius: 50px;
@@ -48,12 +48,18 @@
 			height: 400px;
 			margin: auto;
 		}
+		.text{
+			font-family:'Roboto', sans-serif;
+			background-color: white;
+			border-radius:10px;
+			padding: 10px 10px 10px 10px;
+		}
 	</style>
 </head>
 <body align = "center">
 	<div class = di align = "right">
 		<img class = "logo" align = "left" src="LOGO.png" alt="ICON">                                                       
-		<button align = "right" class = "loginbutton">Login</button>
+		<button onclick="window.location = 'SIGNUP.html'" align = "right" class = "loginbutton">SIGN UP</button>
 	</div>
 	<br>
 	<br>
@@ -61,12 +67,12 @@
 		<h1><b>LOGIN</b></h1>
 		<form>
 			<p><B>USERNAME</B></p>
-			<input type="text" name="" placeholder="Enter Username">
+			<input class = "text" type="text" name="" placeholder="Enter Username">
 			<p><b>PASSWORD</b></p>
-			<input type="password" name="" placeholder="Enter Password"><br><br>
-			<input style = "font-family: 'Satisfy',cursive; " type="submit" name="" value="LOGIN"><br><br>
-			<a href="#">Forgot Password</a><br>
-			<a href="#">Don't have an account? Sign up here.</a>
+			<input class = "text" type="password" name="" placeholder="Enter Password"><br><br>
+			<input class = "loginbutton" type="submit" name="" value="LOGIN"><br><br>
+			<a href="#">Forgot Password</a><br><br>
+			<a href="SIGNUP.html">Don't have an account? Sign up here.</a>
 		</form>
 	</div>
 
