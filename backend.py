@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request
 
-app = Flask(login.html)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('login.html')
+    return render_template('HOMEPAGE.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -18,5 +18,5 @@ def login():
     else:
         return 'Invalid credentials.'
 
-if login.html == '_main_':
+if __name__ == '_main_':
     app.run()
