@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome</title>
+		<link rel="icon" type="image/x-icon" href="ICON.png">
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
+			.di{
+				background-color: white;
+				padding: 20px 50px 30px 50px;
+				border-radius:50px;
+				text-align: "right";
+			}
+			.loginbutton{
+				background-color: #258cda;
+				color: white;
+				padding: 5px 25px 5px 25px;
+				border: none;
+				margin-top:10px;
+				font-family: "Roboto", sans-serif;
+				position: relative;
+         		bottom: 0;
+         		transition: bottom 0.5s ease;
+         		border-radius:10px;
+			}
+			.loginbutton:hover{
+				bottom:20px;
+			}
+			body{
+				background-image: url("signup_background.jpg");
+  				background-repeat: no-repeat;
+ 				background-attachment: fixed;
+  		    	background-size: cover;
+			}
+            .logo{
+				width: 171px;
+				height: 40px;
+				padding: 0px 0px 30px 10px;
+				margin-top:3px;
+			}
+            .account{
+                border-radius: 20px; 
+                padding: 8px 10px 0px 15px;
+            }
+			.dropdown-content {
+  				display: none;
+				background-color: white;
+				width:100px;
+				height:40px;
+				margin-top: 10px;
+				margin-left:10px;
+				margin-right:55px;
+				text-align: center;
+				border-radius:20px;
+				border: 2px solid black;
+				font-family:"Roboto", sans-serif;
+				padding:20px 0px 20px 0px;
+			}
+			.dropdown-content a {
+				color: black;
+				display: block;
+				font-size: small;
+			}
+			.show {display: block;}
+			.nav{
+				font-family: "Roboto",sans-serif;
+			}
+			.nav .search-container {
+  				float: left;
+			}
+			.nav .filterbtn{
+				float:right;
+			}
+			.filter{
+				color: white;
+				background-color: #258cda;
+				border-radius: 10px;
+				border:none;
+				font-family: "Roboto", sans-serif;
+				margin-right: 50px;
+				padding:5px 5px 5px 5px;
+			}
+			.search{
+				border-radius: 10px;
+				font-family:"Roboto",sans-serif;
+				padding: 5px 5px 5px 5px;
+				margin-left: 50px;
+			}
+        </style>
+    </head>
+	<body>
+        <div class = di align = "right">
+			<img class = "logo" align = "left" src="LOGO.png" alt="ICON"> 
+            <img class = "account" height = 30px width = 30px align = "right" src = "ACCOUNT.jpg">  
+			<button class = "loginbutton">MY MEETINGS</button>                                            
+			<button class = "loginbutton">MY BOOKINGS</button>  
+			<button onclick = "creditdrop()" class = "loginbutton">CREDITS</button>
+			<div id="CreditDropdown" class="dropdown-content">
+				<b style = "color:#258cda; display: block; font-family: 'Roboto', sans-serif;">25</b>
+				<a style = "text-decoration: none; padding: 5px;" href="contact">Request Credits</a>
+			</div>
+			<script>
+				function creditdrop() {
+				  document.getElementById("CreditDropdown").classList.toggle("show");
+				}
+				window.onclick = function(event) {
+				  if (!event.target.matches('.loginbutton')) {
+					var dropdowns = document.getElementsByClassName("dropdown-content");
+					var i;
+					for (i = 0; i < dropdowns.length; i++) {
+					  var openDropdown = dropdowns[i];
+					  if (openDropdown.classList.contains('show')) {
+						openDropdown.classList.remove('show');
+					  }
+					}
+				  }
+				}
+				</script>
+		</div>
+		<br>
+		<div class = "nav">
+			<div class="search-container">
+			  <form>
+				<input class = "search" type="text" placeholder="Search.." name="search">
+				<button class = "filter" TYPE = "submit">SEARCH</button>
+			  </form>
+			</div>
+			<div class = "filterbtn">
+				<button onclick = "filterdrop()" class = "filter">FILTER</button>
+				<div id="filterDropdown" class="dropdown-content">
+					<button style = "background-color:white; border:none;">FREE</button>
+					<button style = "background-color:white; border:none;">OCCUPIED</button>
+				</div>
+				<br>
+				<script>
+					function filterdrop() {
+					  document.getElementById("filterDropdown").classList.toggle("show");
+					}
+					window.onclick = function(event) {
+					  if (!event.target.matches('.filter')) {
+						var dropdowns = document.getElementsByClassName("dropdown-content");
+						var i;
+						for (i = 0; i < dropdowns.length; i++) {
+						  var openDropdown = dropdowns[i];
+						  if (openDropdown.classList.contains('show')) {
+							openDropdown.classList.remove('show');
+						  }
+						}
+					  }
+					}
+					</script>
+			</div>
+		  </div>
+    </body>
+</html>
