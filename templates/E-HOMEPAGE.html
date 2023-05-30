@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Welcome</title>
-		<link rel="icon" type="image/x-icon" href="ICON.png">
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ICON.png') }}">
 		<style>
 			@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap');
 			.di{
@@ -27,7 +27,7 @@
 				bottom:20px;
 			}
 			body{
-				background-image: url("signup_background.jpg");
+				background-image: url("{{ url_for('static', filename='signup_background.jpg') }}");
   				background-repeat: no-repeat;
  				background-attachment: fixed;
   		    	background-size: cover;
@@ -96,7 +96,7 @@
 				border-radius: 10px;
 				height:200px;
 				width:200px;
-				background-image: url('room1.jpg'); 
+				background-image: url("{{ url_for('static', filename='room1.jpg') }}");
 				background-repeat: no-repeat;
 				background-size: cover;
 				margin-left: 30px;
@@ -178,10 +178,10 @@
 			</div>
 		</div>
         <div class = di align = "right">
-			<img class = "logo" align = "left" src="LOGO.png" alt="ICON"> 
-            <img class = "account" height = 30px width = 30px align = "right" src = "ACCOUNT.jpg">  
+			<img class = "logo" align = "left" src="{{ url_for('static', filename='LOGO.png') }}" alt="ICON"> 
+            <img class = "account" height = 30px width = 30px align = "right" src = "{{ url_for('static', filename='ACCOUNT.jpg') }}">  
 			<button class = "loginbutton">MY MEETINGS</button>   
-			<a href="{{ url_for('logout') }}" style = "text-decoration: none; font-family: 'Roboto',sans-serif;">Hi, {{session.username}}!! </a>                                       
+			<a href="{{ url_for('logout') }}"  class = "loginbutton" style = "text-decoration: none; font-family: 'Roboto',sans-serif;">{{session.username}} </a>                                       
 		</div>
 		<br>
 		<div class = "nav">

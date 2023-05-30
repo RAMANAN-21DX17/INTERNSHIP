@@ -66,15 +66,16 @@
 	<br>
 	<div class="signup">
 		<h1><b>LOGIN</b></h1>
-		<form  action="{{ url_for('login') }}" method='POST'>
+		<form  action="{{ url_for('login') }}" method="post">
 			<p><B>USERNAME</B></p>
-			<input id ='username' class = "text" type="text" name="" placeholder="Enter Username">
+			<input id ="username" class = "text" type="text" name="username" placeholder="Enter Username">
 			<p><b>PASSWORD</b></p>
-			<input id ='password' class = "text" type="password" name="" placeholder="Enter Password"><br><br>
-			<input class = "loginbutton" type="submit" name="" value="LOGIN"><br><br>
-			<a href="#">Forgot Password</a><br><br>
-			<a href="{{url_for('register')}}">Don't have an account? Sign up here.</a>
+			<input id ="password" class = "text" type="password" name="password" placeholder="Enter Password"><br><br>
+			<input class = "loginbutton" type="submit" value="SIGN IN"><br><br>
 		</form>
+		<a href="#">Forgot Password</a><br><br>
+		<a href="{{url_for('register')}}">Don't have an account? Sign up here.</a>
+		<b> {{msg}}</b>
 	</div>
 </body>
 </html>
