@@ -99,49 +99,89 @@
 				background-image: url('room1.jpg'); 
 				background-repeat: no-repeat;
 				background-size: cover;
-				margin-left: 50px;
-				margin-right: 20px;
+				margin-left: 30px;
+				margin-right: 30px;
+				margin-top: 40px;
+				margin-bottom: 40px;
 			}
 			.amenities{
 				background-color: white;
 				border-radius: 10px;
-				height:80px;
+				height:100px;
 				width:80px;
 				margin-left: 10px;
 				padding: 10px 10px 10px 10px;
 				font-family: "Roboto",sans-serif;
 				font-size: small;
 			}
+			.overlay {
+				height: 100%;
+				width: 0;
+				position: fixed;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				background-color: rgb(0,0,0);
+				background-color: rgba(0,0,0, 0.9);
+				overflow-x: hidden;
+				transition: 0.5s;
+			}
+
+			.overlay-content {
+				position: relative;
+				top: 15%;
+				width: 100%;
+				text-align: center;
+				margin-top: 30px;
+			}
+
+			.overlay a {
+				padding: 8px;
+				text-decoration: none;
+				font-size: 36px;
+				color: WHITE;
+				display: block;
+				transition: 0.3s;
+			}
+			.overlay b{
+				padding: 8px;
+				text-decoration: none;
+				font-size: 36px;
+				color: WHITE;
+				display: block;
+				transition: 0.3s;
+			}
+			.overlay a:hover, .overlay a:focus {
+				color: #f1f1f1;
+			}
+
+			.overlay .closebtn {
+				position: absolute;
+				top: 20px;
+				right: 45px;
+				font-size: 60px;
+			}
         </style>
     </head>
 	<body>
+		<div id="myNav" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<div class="overlay-content">
+			  <b>SELECT TIMINGS</b>
+			  <a href="#">9-10 AM</a>
+			  <a href="#">10-11 AM</a>
+			  <a href="#">11-12 AM</a>
+			  <a href="#">12-1 PM</a>
+			  <a href="#">1-2 PM</a>
+			  <a href="#">2-3 PM</a>
+			  <a href="#">3-4 PM</a>
+			</div>
+		</div>
         <div class = di align = "right">
 			<img class = "logo" align = "left" src="LOGO.png" alt="ICON"> 
             <img class = "account" height = 30px width = 30px align = "right" src = "ACCOUNT.jpg">  
-			<button class = "loginbutton">MY MEETINGS</button>                                            
-			<button class = "loginbutton">MY BOOKINGS</button>  
-			<button onclick = "creditdrop()" class = "loginbutton">CREDITS</button>
-			<div id="CreditDropdown" class="dropdown-content">
-				<b style = "color:#258cda; display: block; font-family: 'Roboto', sans-serif;">25</b>
-				<a style = "text-decoration: none; padding: 5px;" href="contact">Request Credits</a>
-			</div>
-			<script>
-				function creditdrop() {
-				  document.getElementById("CreditDropdown").classList.toggle("show");
-				}
-				window.onclick = function(event) {
-				  if (!event.target.matches('.loginbutton')) {
-					var dropdowns = document.getElementsByClassName("dropdown-content");
-					var i;
-					for (i = 0; i < dropdowns.length; i++) {
-					  var openDropdown = dropdowns[i];
-					  if (openDropdown.classList.contains('show')) {
-						openDropdown.classList.remove('show');
-					  }
-					}
-				  }
-				}
-				</script>
+			<button class = "loginbutton">MY MEETINGS</button>   
+			<a href="{{ url_for('logout') }}" style = "text-decoration: none; font-family: 'Roboto',sans-serif;">Hi, {{session.username}}!! </a>                                       
 		</div>
 		<br>
 		<div class = "nav">
@@ -180,44 +220,55 @@
 		  <br>
 		  <br>
 		  <div class ="rooms">
-			<br>
-			<br>
 			<div class = "room" > <br>
 				<div class = "amenities" >
 					<b style = "font-size: medium;">COORG</b><br>
-					Amenities: AC, MIC, TV<br>
-					<button class = "loginbutton" ><B>+</B></button>
-				</div>
-			</div>
-			<br>
-			<div class = "room" > <br>
-				<div class = "amenities" >
-					<b style = "font-size: medium;">COORG</b><br>
-					Amenities: AC, MIC, TV<br>
-					<button class = "loginbutton" ><B>+</B></button>
+					AC, MIC, TV<br>
+					CAPACITY: 4<br>
+					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
 					<b style = "font-size: medium;">COORG</b><br>
-					Amenities: AC, MIC, TV<br>
-					<button class = "loginbutton" ><B>+</B></button>
+					AC, MIC, TV<br>
+					CAPACITY: 4<br>
+					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
 					<b style = "font-size: medium;">COORG</b><br>
-					Amenities: AC, MIC, TV<br>
-					<button class = "loginbutton" ><B>+</B></button>
+					AC, MIC, TV<br>
+					CAPACITY: 4<br>
+					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
 					<b style = "font-size: medium;">COORG</b><br>
-					Amenities: AC, MIC, TV<br>
-					<button class = "loginbutton" ><B>+</B></button>
+					AC, MIC, TV<br>
+					CAPACITY: 4<br>
+					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
 				</div>
-			</div><br><br>
+			</div>
+			<div class = "room" > <br>
+				<div class = "amenities" >
+					<b style = "font-size: medium;">COORG</b><br>
+					 AC, MIC, TV<br>
+					CAPACITY: 4<br>
+					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
+				</div>
+			</div>
 		</div>
+		<script>
+			function openNav() {
+			  document.getElementById("myNav").style.width = "100%";
+			}
+			
+			function closeNav() {
+			  document.getElementById("myNav").style.width = "0%";
+			}
+			</script>			
     </body>
 </html>

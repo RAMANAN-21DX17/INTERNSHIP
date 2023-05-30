@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>Welcome</title>
-		<link rel="icon" type="image/x-icon" href="ICON.png">
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='ICON.png') }}">
 		<style>
 			.di{
 				background-color: white;
@@ -26,7 +27,7 @@
 				bottom:20px;
 			}
 			body{
-				background-image: url("signup_background.jpg");
+				background-image: url("{{ url_for('static', filename='signup_background.jpg') }}");
   				background-repeat: no-repeat;
  				background-attachment: fixed;
   		    	background-size: cover;
@@ -65,13 +66,13 @@
 	</head>
 	<body>
 		<div class = di align="right">
-			<img class = "logo" align = "left" src="LOGO.png" alt="ICON">                                                       
-			<button align = "right" onclick="window.location = 'LOGIN.html';" class = "loginbutton">Login</button>
+			<img class = "logo" align = "left" src="{{ url_for('static', filename='LOGO.png') }}" alt="ICON">                                                       
+			<a align = "right"  href = "{{url_for('login')}}" class = "loginbutton" style = " text-decoration:none; font-size:small;">Login</a>
 		</div>
 		<br>
 		<br>
 		<div class = "content">
-			<img align = "right" class = "image" src="welcome.png" alt="Conference room">
+			<img align = "right" class = "image" src="{{ url_for('static', filename='welcome.png') }}" alt="Conference room">
 			<div style = "padding:80px 80px">	
 				<div class = "rect">
 					<b>
@@ -80,8 +81,8 @@ YOU CREATE
 IDEAS, 
 WE CREATE 
 YOUR MEETINGS.</b>
-<button onclick="window.location = 'SIGNUP.html'" style = "padding: 10px 25px;" class = "loginbutton">Get Started</button>
-                 				</pre>
+<a href = "{{url_for('register')}}" style = "padding: 10px 25px; text-decoration:none; font-size:small;" class = "loginbutton">Get Started</a>
+            </pre>
 				</div>
 			</div>
 		</div>
