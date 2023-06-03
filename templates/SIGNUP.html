@@ -88,17 +88,17 @@
 		</script>
 		<form action="{{ url_for('register') }}" method="post">
 			<p><B>ENTER POSITION</B></p>
-			<input id = "usertype" class = "text" type="text" name="usertype" placeholder="Admin or Employee?">
+			<input id = "usertype" class = "text" type="text" name="usertype" placeholder="Admin or Employee?" required>
 			<p><B>ENTER USERNAME</B></p>
-			<input id = "username" class = "text" type="text" name="username" placeholder="Enter Username">
+			<input id = "username" class = "text" type="text" name="username" placeholder="Enter Username" required>
 			<p><B>COMPANY NAME</B></p>
-			<input id = "company" class = "text" type="text" name="company" placeholder="COMPANY NAME">
+			<input id = "company" class = "text" type="text" name="company" placeholder="COMPANY NAME" required>
 			<p><B>LOCATION</B></p>
-			<input id = "location" class = "text" type="text" name="location" placeholder="CITY, STATE">
+			<input id = "location" class = "text" type="text" name="location" placeholder="CITY, STATE" required>
 			<p><B>EMAIL</B></p>
-			<input id = "email" class = "text" type="text" name="email" placeholder="example@exampledomain.com">
+			<input id = "email" class = "text" type="text" name="email" placeholder="example@exampledomain.com" required>
 			<p><b>PASSWORD</b></p>
-			<input id = "password" class = "text" type="password" name="password" placeholder="Enter Password"><br><br>
+			<input id = "password" class = "text" type="password" name="password" placeholder="Enter Password" required><br><br>
 			<input class = "loginbutton" style = "font-family: 'Roboto', sans-serif; " type="submit" name="" value="SIGN UP"><br><br>
 		</form>
 		<a href="{{ url_for('login')}}">Already have an account? Sign in here.</a>

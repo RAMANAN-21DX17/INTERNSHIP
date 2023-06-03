@@ -147,7 +147,7 @@
 				padding: 8px;
 				text-decoration: none;
 				font-size: 36px;
-				color: WHITE;
+				color: rgb(255, 255, 255);
 				display: block;
 				transition: 0.3s;
 			}
@@ -164,110 +164,241 @@
         </style>
     </head>
 	<body>
-		<div id="myNav" class="overlay">
-			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div id="myNav1" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
 			<div class="overlay-content">
 			  <b>SELECT TIMINGS</b>
-			  <a href="#">9-10 AM</a>
-			  <a href="#">10-11 AM</a>
-			  <a href="#">11-12 AM</a>
-			  <a href="#">12-1 PM</a>
-			  <a href="#">1-2 PM</a>
-			  <a href="#">2-3 PM</a>
-			  <a href="#">3-4 PM</a>
+			  <a id = "1time1" href="{{ url_for('time11') }}">9-10 AM </a>
+			  <a id = "1time2" href="{{ url_for('time12') }}">10-11 AM </a>
+			  <a id = "1time3" href="{{ url_for('time13') }}">11-12 AM </a>
+			  <a id = "1time4" href="{{ url_for('time14') }}">2-3 PM </a>
+			  <a id = "1time5" href="{{ url_for('time15') }}">3-4 PM </a>
+			</div>
+		</div>
+		<div id="myNav2" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+			<div class="overlay-content">
+			  <b>SELECT TIMINGS</b>
+			  <a id = "2time1" href="{{ url_for('time21') }}">9-10 AM </a>
+			  <a id = "2time2" href="{{ url_for('time22') }}">10-11 AM </a>
+			  <a id = "2time3" href="{{ url_for('time23') }}">11-12 AM </a>
+			  <a id = "2time4" href="{{ url_for('time24') }}">2-3 PM </a>
+			  <a id = "2time5" href="{{ url_for('time25') }}">3-4 PM </a>
+			</div>
+		</div>
+		<div id="myNav3" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav3()">&times;</a>
+			<div class="overlay-content">
+			  <b>SELECT TIMINGS</b>
+			  <a id = "3time1" href="{{ url_for('time31') }}">9-10 AM </a>
+			  <a id = "3time2" href="{{ url_for('time32') }}">10-11 AM </a>
+			  <a id = "3time3" href="{{ url_for('time33') }}">11-12 AM </a>
+			  <a id = "3time4" href="{{ url_for('time34') }}">2-3 PM </a>
+			  <a id = "3time5" href="{{ url_for('time35') }}">3-4 PM </a>
+			</div>
+		</div>
+		<div id="myNav4" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav4()">&times;</a>
+			<div class="overlay-content">
+			  <b>SELECT TIMINGS</b>
+			  <a id = "4time1" href="{{ url_for('time41') }}">9-10 AM </a>
+			  <a id = "4time2" href="{{ url_for('time42') }}">10-11 AM </a>
+			  <a id = "4time3" href="{{ url_for('time43') }}">11-12 AM </a>
+			  <a id = "4time4" href="{{ url_for('time44') }}">2-3 PM </a>
+			  <a id = "4time5" href="{{ url_for('time45') }}">3-4 PM </a>
+			</div>
+		</div>
+		<div id="myNav5" class="overlay">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav5()">&times;</a>
+			<div class="overlay-content">
+			  <b>SELECT TIMINGS</b>
+			  <a id = "5time1" href="{{ url_for('time51') }}">9-10 AM </a>
+			  <a id = "5time2" href="{{ url_for('time52') }}">10-11 AM </a>
+			  <a id = "5time3" href="{{ url_for('time53') }}">11-12 AM </a>
+			  <a id = "5time4" href="{{ url_for('time54') }}">2-3 PM </a>
+			  <a id = "5time5" href="{{ url_for('time55') }}">3-4 PM </a>
 			</div>
 		</div>
         <div class = di align = "right">
 			<img class = "logo" align = "left" src="{{ url_for('static', filename='LOGO.png') }}" alt="ICON"> 
             <img class = "account" height = 30px width = 30px align = "right" src = "{{ url_for('static', filename='ACCOUNT.jpg') }}">  
-			<button class = "loginbutton">MY MEETINGS</button>   
+			<a  href="{{ url_for('meetings') }}" class = "loginbutton" style = "text-decoration: none; font-family: 'Roboto',sans-serif;">MY MEETINGS</a>    
 			<a href="{{ url_for('logout') }}"  class = "loginbutton" style = "text-decoration: none; font-family: 'Roboto',sans-serif;">{{session.username}} </a>                                       
-		</div>
-		<br>
-		<div class = "nav">
-			<div class="search-container">
-			  <form>
-				<input class = "search" type="text" placeholder="Search.." name="search">
-				<button class = "filter" TYPE = "submit">SEARCH</button>
-			  </form>
-			</div>
-			<div class = "filterbtn">
-				<button onclick = "filterdrop()" class = "filter">FILTER</button>
-				<div id="filterDropdown" class="dropdown-content">
-					<button style = "background-color:white; border:none;">FREE</button>
-					<button style = "background-color:white; border:none;">OCCUPIED</button>
-				</div>
-				<br>
-				<script>
-					function filterdrop() {
-					  document.getElementById("filterDropdown").classList.toggle("show");
-					}
-					window.onclick = function(event) {
-					  if (!event.target.matches('.filter')) {
-						var dropdowns = document.getElementsByClassName("dropdown-content");
-						var i;
-						for (i = 0; i < dropdowns.length; i++) {
-						  var openDropdown = dropdowns[i];
-						  if (openDropdown.classList.contains('show')) {
-							openDropdown.classList.remove('show');
-						  }
-						}
-					  }
-					}
-					</script>
-			</div>
 		</div>
 		  <br>
 		  <br>
 		  <div class ="rooms">
 			<div class = "room" > <br>
 				<div class = "amenities" >
-					<b style = "font-size: medium;">COORG</b><br>
+					<b id = "change" style = "font-size: medium;">{{room1.name}}</b><br>
 					AC, MIC, TV<br>
 					CAPACITY: 4<br>
-					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
+					<button class = "loginbutton" onclick="openNav1()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
-					<b style = "font-size: medium;">COORG</b><br>
+					<b style = "font-size: medium;">{{room2.name}}</b><br>
 					AC, MIC, TV<br>
 					CAPACITY: 4<br>
-					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
+					<button class = "loginbutton" onclick="openNav2()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
-					<b style = "font-size: medium;">COORG</b><br>
+					<b style = "font-size: medium;">{{room3.name}}</b><br>
 					AC, MIC, TV<br>
 					CAPACITY: 4<br>
-					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
+					<button class = "loginbutton" onclick="openNav3()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
-					<b style = "font-size: medium;">COORG</b><br>
+					<b style = "font-size: medium;">{{room4.name}}</b><br>
 					AC, MIC, TV<br>
 					CAPACITY: 4<br>
-					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
+					<button class = "loginbutton" onclick="openNav4()" ><B>+</B></button>
 				</div>
 			</div>
 			<div class = "room" > <br>
 				<div class = "amenities" >
-					<b style = "font-size: medium;">COORG</b><br>
+					<b style = "font-size: medium;">{{room5.name}}</b><br>
 					 AC, MIC, TV<br>
 					CAPACITY: 4<br>
-					<button class = "loginbutton" onclick="openNav()" ><B>+</B></button>
+					<button class = "loginbutton" onclick="openNav5()" ><B>+</B></button>
 				</div>
 			</div>
 		</div>
 		<script>
-			function openNav() {
-			  document.getElementById("myNav").style.width = "100%";
+			function openNav1() {
+			  document.getElementById("myNav1").style.width = "100%";
+			  if('{{room1.time1}}' == "None"){
+				document.getElementById("1time1").removeAttribute("href");
+				document.getElementById("1time1").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room1.time2}}' == "None"){
+				document.getElementById("1time2").removeAttribute("href");
+				document.getElementById("1time2").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room1.time3}}' == "None"){
+				document.getElementById("1time3").removeAttribute("href");
+				document.getElementById("1time3").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room1.time4}}' == "None"){
+				document.getElementById("1time4").removeAttribute("href");
+				document.getElementById("1time4").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room1.time5}}' == "None"){
+				document.getElementById("1time5").removeAttribute("href");
+				document.getElementById("1time5").style.color="rgb(180, 173, 173)";
+			  }
 			}
-			
-			function closeNav() {
-			  document.getElementById("myNav").style.width = "0%";
+			function closeNav1() {
+			  document.getElementById("myNav1").style.width = "0%";
+			}
+			function openNav2() {
+			  document.getElementById("myNav2").style.width = "100%";
+			  if('{{room2.time1}}' == "None"){
+				document.getElementById("2time1").removeAttribute("href");
+				document.getElementById("2time1").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room2.time2}}' == "None"){
+				document.getElementById("2time2").removeAttribute("href");
+				document.getElementById("2time2").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room2.time3}}' == "None"){
+				document.getElementById("2time3").removeAttribute("href");
+				document.getElementById("2time3").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room2.time4}}' == "None"){
+				document.getElementById("2time4").removeAttribute("href");
+				document.getElementById("2time4").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room2.time5}}' == "None"){
+				document.getElementById("2time5").removeAttribute("href");
+				document.getElementById("2time5").style.color="rgb(180, 173, 173)";
+			  }
+			}
+			function closeNav2() {
+			  document.getElementById("myNav2").style.width = "0%";
+			}
+			function openNav3() {
+			  document.getElementById("myNav3").style.width = "100%";
+			  if('{{room3.time1}}' == "None"){
+				document.getElementById("3time1").removeAttribute("href");
+				document.getElementById("3time1").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room3.time2}}' == "None"){
+				document.getElementById("3time2").removeAttribute("href");
+				document.getElementById("3time2").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room3.time3}}' == "None"){
+				document.getElementById("3time3").removeAttribute("href");
+				document.getElementById("3time3").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room3.time4}}' == "None"){
+				document.getElementById("3time4").removeAttribute("href");
+				document.getElementById("3time4").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room3.time5}}' == "None"){
+				document.getElementById("3time5").removeAttribute("href");
+				document.getElementById("3time5").style.color="rgb(180, 173, 173)";
+			  }
+			}
+			function closeNav3() {
+			  document.getElementById("myNav3").style.width = "0%";
+			}
+			function openNav4() {
+			  document.getElementById("myNav4").style.width = "100%";
+			  if('{{room4.time1}}' == "None"){
+				document.getElementById("4time1").removeAttribute("href");
+				document.getElementById("4time1").style.color="rgb(180, 173, 173)";
+			  }
+			}
+			if('{{room4.time2}}' == "None"){
+				document.getElementById("4time3").removeAttribute("href");
+				document.getElementById("4time3").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room4.time3}}' == "None"){
+				document.getElementById("4time3").removeAttribute("href");
+				document.getElementById("4time3").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room4.time4}}' == "None"){
+				document.getElementById("4time4").removeAttribute("href");
+				document.getElementById("4time4").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room4.time5}}' == "None"){
+				document.getElementById("4time5").removeAttribute("href");
+				document.getElementById("4time5").style.color="rgb(180, 173, 173)";
+			  }
+			function closeNav4() {
+			  document.getElementById("myNav4").style.width = "0%";
+			}
+			function openNav5() {
+			  document.getElementById("myNav5").style.width = "100%";
+			  if('{{room5.time1}}' == "None"){
+				document.getElementById("5time1").removeAttribute("href");
+				document.getElementById("5time1").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room5.time2}}' == "None"){
+				document.getElementById("5time2").removeAttribute("href");
+				document.getElementById("5time2").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room5.time3}}' == "None"){
+				document.getElementById("5time3").removeAttribute("href");
+				document.getElementById("5time3").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room5.time4}}' == "None"){
+				document.getElementById("5time4").removeAttribute("href");
+				document.getElementById("5time4").style.color="rgb(180, 173, 173)";
+			  }
+			  if('{{room5.time5}}' == "None"){
+				document.getElementById("5time5").removeAttribute("href");
+				document.getElementById("5time5").style.color="rgb(180, 173, 173)";
+			  }
+			}
+			function closeNav5() {
+			  document.getElementById("myNav5").style.width = "0%";
 			}
 			</script>			
     </body>

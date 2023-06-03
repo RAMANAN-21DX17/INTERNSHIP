@@ -4,16 +4,17 @@ from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+import json
  
  
 app = Flask(__name__)
  
- 
+global account ,room, room1, room2, room3,room4,room5
 app.secret_key = 'RAMANAN'
  
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'fide25610279'
+app.config['MYSQL_PASSWORD'] = 'Ramanan1836@'
 app.config['MYSQL_DB'] = 'makemymeeting'
  
 mysql = MySQL(app)
@@ -22,11 +23,13 @@ mysql = MySQL(app)
 def home():
     msg = ''
     return render_template('Index.html', msg = msg)
+
 @app.route('/login', methods =['GET', 'POST'])
 def login():
-    msg = ''
     print ("login")
+    msg = " "
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        global account ,room, room1, room2, room3,room4,room5
         username = request.form['username']
         password = request.form['password']
         print ("requested")
@@ -39,22 +42,28 @@ def login():
             session['loggedin'] = True
             session['id'] = account['id']
             session['username'] = account['username']
-            msg = 'Logged in successfully !'
             if account["positon"] == "Employee":
-                return render_template('E-HOMEPAGE.html', msg = msg)
+                cursor.execute('SELECT name,time1,time2,time3,time4,time5 FROM room WHERE company = % s', (account['company'], ))
+                room = cursor.fetchall()
+                print(room)
+                room1 = room[0] 
+                room2 = room[1]
+                room3 = room[2]
+                room4 = room[3]
+                room5 = room[4]
+                return render_template('E-HOMEPAGE.html',room1 = room1,room2 = room1,room3 =room3,room4 = room4,room5 = room5 )
             else:
                 return render_template('A-HOMEPAGE.html',msg =msg)
         else:
             msg = 'Incorrect username / password !'
-    return render_template('LOGIN.html', msg = msg)
- 
+    return render_template('LOGIN.html') 
 @app.route('/logout')
 def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
     return redirect(url_for('login'))
- 
+
 @app.route('/register', methods =['GET', 'POST'])
 def register():
     msg = ''
@@ -81,10 +90,235 @@ def register():
         elif usertype == 'Admin' and com:
             msg = 'Your Company is already registered!!'
         else:
-            cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s, % s, % s, % s)', (username, password, email, location, company, usertype, ))
-            mysql.connection.commit()
-            msg = 'You have successfully registered !'
-            return render_template('LOGIN.html', msg = msg)
-    elif request.method == 'POST':
-        msg = 'Please fill out the form !'
+            if usertype == 'Employee':
+                cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s, % s, % s, % s)', (username, password, email, location, company, usertype, ))
+                mysql.connection.commit()
+                msg = 'You have successfully registered !'
+                for i in range(0,5):
+                    cursor.execute('insert into meetings values (%s ,null,null,null,null,null)',(username,))
+                    mysql.connection.commit()
+                return render_template('LOGIN.html', msg = msg)
+            elif usertype == 'Admin':
+                cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s, % s, % s, % s)', (username, password, email, location, company, usertype, ))
+                mysql.connection.commit()
+                cursor.execute('INSERT INTO company VALUES ( % s, % s, 0)', ( company, location, ))
+                mysql.connection.commit()
+                for i in range(0,5):
+                    cursor.execute('insert into room values (%s ,null ,"available","available","available","available","available")',(company,))
+                    mysql.connection.commit()
+                    cursor.execute('insert into meetings values (%s ,null,null,null,null,null)',(username,))
+                    mysql.connection.commit()
+                msg = 'You have successfully registered !'
+                return render_template('LOGIN.html', msg = msg)
     return render_template('SIGNUP.html', msg = msg)
+
+@app.route('/time11')
+def time11():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time1 = null where company = %s and name = %s',(account['company'],room1['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting1 = %s where user = %s',(room1['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time12')
+def time12():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time2 = null where company = %s and name = %s',(account['company'],room1['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting2 = %s where user = %s',(room1['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time13')
+def time13():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time3 = null where company = %s and name = %s',(account['company'],room1['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting3 = %s where user = %s',(room1['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time14')
+def time14():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time4 = null where company = %s and name = %s',(account['company'],room1['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting4 = %s where user = %s',(room1['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time15')
+def time15():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time5 = null where company = %s and name = %s',(account['company'],room1['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting5 = %s where user = %s',(room1['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+
+@app.route('/time21')
+def time21():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time1 = null where company = %s and name = %s',(account['company'],room2['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting1 = %s where user = %s',(room2['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time22')
+def time22():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time2 = null where company = %s and name = %s',(account['company'],room2['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting2 = %s where user = %s',(room2['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time23')
+def time23():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time3 = null where company = %s and name = %s',(account['company'],room2['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting3 = %s where user = %s',(room2['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time24')
+def time24():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time4 = null where company = %s and name = %s',(account['company'],room2['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting4 = %s where user = %s',(room2['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time25')
+def time25():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time5 = null where company = %s and name = %s',(account['company'],room2['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting5 = %s where user = %s',(room2['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+
+@app.route('/time31')
+def time31():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time1 = null where company = %s and name = %s',(account['company'],room3['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting1 = %s where user = %s',(room3['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time32')
+def time32():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time2 = null where company = %s and name = %s',(account['company'],room3['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting2 = %s where user = %s',(room3['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time33')
+def time33():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time3 = null where company = %s and name = %s',(account['company'],room3['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting3 = %s where user = %s',(room3['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time34')
+def time34():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time4 = null where company = %s and name = %s',(account['company'],room3['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting4 = %s where user = %s',(room3['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time35')
+def time35():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time5 = null where company = %s and name = %s',(account['company'],room3['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting5 = %s where user = %s',(room3['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time41')
+def time41():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time1 = null where company = %s and name = %s',(account['company'],room4['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting1 = %s where user = %s',(room4['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time42')
+def time42():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time2 = null where company = %s and name = %s',(account['company'],room4['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting2 = %s where user = %s',(room4['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time43')
+def time43():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time3 = null where company = %s and name = %s',(account['company'],room4['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting3 = %s where user = %s',(room4['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time44')
+def time44():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time4 = null where company = %s and name = %s',(account['company'],room4['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting4 = %s where user = %s',(room4['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time45')
+def time45():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time5 = null where company = %s and name = %s',(account['company'],room4['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting5 = %s where user = %s',(room4['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time51')
+def time51():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time1 = null where company = %s and name = %s',(account['company'],room5['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting1 = %s where user = %s',(room5['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time52')
+def time52():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time2 = null where company = %s and name = %s',(account['company'],room5['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting2 = %s where user = %s',(room5['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time53')
+def time53():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time3 = null where company = %s and name = %s',(account['company'],room5['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting3 = %s where user = %s',(room5['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time54')
+def time54():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time4 = null where company = %s and name = %s',(account['company'],room5['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting4 = %s where user = %s',(room5['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+@app.route('/time55')
+def time55():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update room set time5 = null where company = %s and name = %s',(account['company'],room5['name'],))
+    mysql.connection.commit()
+    cursor.execute('update meetings set meeting5 = %s where user = %s',(room5['name'],account['username'],))
+    mysql.connection.commit()
+    return redirect(url_for('meetings'))
+
+@app.route('/meetings')
+def meetings():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
+    meet = cursor.fetchall()
+    print(meet)
+    return render_template('meetings.html', meet = meet)
