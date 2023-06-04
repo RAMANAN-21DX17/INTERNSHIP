@@ -9,7 +9,7 @@ import json
  
 app = Flask(__name__)
  
-global account ,room, room1, room2, room3,room4,room5
+global account ,room, room1, room2, room3,room4,room5, meet
 app.secret_key = 'RAMANAN'
  
 app.config['MYSQL_HOST'] = 'localhost'
@@ -51,7 +51,7 @@ def login():
                 room3 = room[2]
                 room4 = room[3]
                 room5 = room[4]
-                return render_template('E-HOMEPAGE.html',room1 = room1,room2 = room1,room3 =room3,room4 = room4,room5 = room5 )
+                return render_template('E-HOMEPAGE.html',room1 = room1,room2 = room2,room3 =room3,room4 = room4,room5 = room5 )
             else:
                 return render_template('A-HOMEPAGE.html',msg =msg)
         else:
@@ -103,8 +103,10 @@ def register():
                 mysql.connection.commit()
                 cursor.execute('INSERT INTO company VALUES ( % s, % s, 0)', ( company, location, ))
                 mysql.connection.commit()
+                i = 0
                 for i in range(0,5):
-                    cursor.execute('insert into room values (%s ,null ,"available","available","available","available","available")',(company,))
+                    room_name = "ROOM "+str(i+1)
+                    cursor.execute('insert into room values (%s ,%s ,"available","available","available","available","available")',(company,room_name,))
                     mysql.connection.commit()
                     cursor.execute('insert into meetings values (%s ,null,null,null,null,null)',(username,))
                     mysql.connection.commit()
@@ -317,8 +319,65 @@ def time55():
 
 @app.route('/meetings')
 def meetings():
+    print("meetings")
+    global meet
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
-    meet = cursor.fetchall()
+    meet = cursor.fetchone()
     print(meet)
+    return render_template('meetings.html', meet = meet)
+
+@app.route('/remove1')
+def remove1():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update meetings set meeting1 = null where user = %s',(account['username'],))
+    mysql.connection.commit()
+    cursor.execute('update room set time1 = "available" where company = %s and name = %s',(account['company'],room1['name'],))
+    mysql.connection.commit()
+    cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
+    meet = cursor.fetchall()
+    return render_template('meetings.html', meet = meet)
+
+@app.route('/remove2')
+def remove2():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update meetings set meeting2 = null where user = %s',(account['username'],))
+    mysql.connection.commit()
+    cursor.execute('update room set time2 = "available" where company = %s and name = %s',(account['company'],room2['name'],))
+    mysql.connection.commit()
+    cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
+    meet = cursor.fetchall()
+    return render_template('meetings.html', meet = meet)
+
+@app.route('/remove3')
+def remove3():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update meetings set meeting3 = null where user = %s',(account['username'],))
+    mysql.connection.commit()
+    cursor.execute('update room set time3 = "available" where company = %s and name = %s',(account['company'],room3['name'],))
+    mysql.connection.commit()
+    cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
+    meet = cursor.fetchall()
+    return render_template('meetings.html', meet = meet)
+
+@app.route('/remove4')
+def remove4():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update meetings set meeting4 = null where user = %s',(account['username'],))
+    mysql.connection.commit()
+    cursor.execute('update room set time4 = "available" where company = %s and name = %s',(account['company'],room4['name'],))
+    mysql.connection.commit()
+    cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
+    meet = cursor.fetchall()
+    return render_template('meetings.html', meet = meet)
+
+@app.route('/remove5')
+def remove5():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('update meetings set meeting5 = null where user = %s',(account['username'],))
+    mysql.connection.commit()
+    cursor.execute('update room set time5 = "available" where company = %s and name = %s',(account['company'],room5['name'],))
+    mysql.connection.commit()
+    cursor.execute('SELECT * FROM meetings WHERE user = %s', (account['username'], ))
+    meet = cursor.fetchall()
     return render_template('meetings.html', meet = meet)
