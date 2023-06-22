@@ -14,7 +14,7 @@ app.secret_key = 'RAMANAN'
  
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Ramanan1836@'
+app.config['MYSQL_PASSWORD'] = 'fide25610279'
 app.config['MYSQL_DB'] = 'makemymeeting'
  
 mysql = MySQL(app)
